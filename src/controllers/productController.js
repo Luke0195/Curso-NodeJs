@@ -6,7 +6,9 @@ module.exports={
 
     async index(req, res){ // Método que lista todos os produtos
         //Listagem
-        const  product = await Product.find()
+        //await Product.find()
+        const {page = 1}= req.query
+        const  product = await Product.paginate({}, {page, limit:10}) // Verificando no número de registro que pode ser visualizado na página
         return res.json(product) // Retorna nossa informações em Json
 
     },
